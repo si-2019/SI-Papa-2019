@@ -22,6 +22,25 @@ app.use("/*", (req, res, next) => {
   next();
 });
 
+//Azra
+app.get("/papa/polozeniPredmeti", function (req, res) {
+  var id_Studenta = req.body.idStudent;
+ 
+  db.predmet_student.findAll({attributes :['idPredmet'], where: {idStudent: id_Studenta, ocjena:{[Op.ne]:null}}}).then(veze =>{
+      niz=[];
+      for(var i = 0; i<veze.length; i++){
+          niz.push(veze[i].idPredmet);
+      }
+      db.Predmet.findAll({where: {id:niz}}).then(predmeti=>{
+          res.send(predmeti);
+      }).catch(function(err){
+          console.log({val:err});
+      });
+  }).catch(function(err){
+      console.log({val:err});
+  });
+
+});
 
 
 app.listen(31916, () => console.log('Server na portu: 31916'));
