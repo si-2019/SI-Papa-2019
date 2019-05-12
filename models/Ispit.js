@@ -67,6 +67,8 @@ module.exports = function(sequelize, DataTypes) {
       field: 'napomena'
     }
   }, {
-    tableName: 'Ispit'
+    tableName: 'Ispit',
+    autoIncrement: true,
+    timestamps: false
   });
 };

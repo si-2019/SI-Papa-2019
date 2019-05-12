@@ -14,11 +14,33 @@ module.exports = function(sequelize, DataTypes) {
       field: 'naziv'
     },
     aktuelna: {
-      type: DataTypes.INTEGER(1),
+      type: DataTypes.ENUM('0','1'),
       allowNull: false,
       field: 'aktuelna'
+    },
+    pocetakZimskogSemestra: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      field: 'pocetak_zimskog_semestra'
+    },
+    krajZimskogSemestra: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      field: 'kraj_zimskog_semestra'
+    },
+    pocetakLjetnogSemestra: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      field: 'pocetak_ljetnog_semestra'
+    },
+    krajLjetnogSemestra: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      field: 'kraj_ljetnog_semestra'
     }
   }, {
-    tableName: 'AkademskaGodina'
+    tableName: 'AkademskaGodina',
+    autoIncrement: true,
+    timestamps: false
   });
 };

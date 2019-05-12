@@ -2,141 +2,79 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('korisnik', {
-    idKorisnik: {
-      type: DataTypes.BIGINT,
+    id: {
+      type: DataTypes.INTEGER(10),
       allowNull: false,
       primaryKey: true,
-      field: 'id_korisnik'
+      field: 'id'
     },
-    adresa: {
+    idOdsjek: {
+      type: DataTypes.INTEGER(10),
+      allowNull: true,
+      references: {
+        model: 'Odsjek',
+        key: 'idodsjek'
+      },
+      field: 'idOdsjek'
+    },
+    idUloga: {
+      type: DataTypes.INTEGER(10),
+      allowNull: true,
+      references: {
+        model: 'Uloga',
+        key: 'iduloga'
+      },
+      field: 'idUloga'
+    },
+    ime: {
       type: DataTypes.STRING(50),
       allowNull: true,
-      field: 'adresa'
+      field: 'ime'
     },
-    ciklus: {
+    prezime: {
       type: DataTypes.STRING(50),
       allowNull: true,
-      field: 'ciklus'
+      field: 'prezime'
     },
     datumRodjenja: {
       type: DataTypes.DATEONLY,
       allowNull: true,
-      field: 'datum_rodjenja'
+      field: 'datumRodjenja'
     },
-    drzavljanstvo: {
-      type: DataTypes.STRING(50),
+    jmbg: {
+      type: DataTypes.STRING(13),
       allowNull: true,
-      field: 'drzavljanstvo'
+      field: 'JMBG'
     },
     email: {
       type: DataTypes.STRING(50),
       allowNull: true,
       field: 'email'
     },
-    fotografija: {
-      type: "LONGBLOB",
-      allowNull: true,
-      field: 'fotografija'
-    },
-    ime: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      field: 'ime'
-    },
-    imePrezimeMajke: {
-      type: DataTypes.STRING(100),
-      allowNull: true,
-      field: 'ime_prezime_majke'
-    },
-    imePrezimeOca: {
-      type: DataTypes.STRING(100),
-      allowNull: true,
-      field: 'ime_prezime_oca'
-    },
-    indeks: {
+    mjestoRodjenja: {
       type: DataTypes.STRING(50),
       allowNull: true,
-      field: 'indeks'
-    },
-    jmbg: {
-      type: DataTypes.STRING(13),
-      allowNull: true,
-      field: 'jmbg'
+      field: 'mjestoRodjenja'
     },
     kanton: {
       type: DataTypes.STRING(50),
       allowNull: true,
       field: 'kanton'
     },
-    linkedin: {
+    drzavljanstvo: {
       type: DataTypes.STRING(50),
       allowNull: true,
-      field: 'linkedin'
-    },
-    mjestoRodjenja: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-      field: 'mjesto_rodjenja'
-    },
-    password: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-      field: 'password'
-    },
-    prezime: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      field: 'prezime'
-    },
-    semestar: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-      field: 'semestar'
-    },
-    spol: {
-      type: DataTypes.INTEGER(1),
-      allowNull: true,
-      field: 'spol'
+      field: 'drzavljanstvo'
     },
     telefon: {
       type: DataTypes.STRING(50),
       allowNull: true,
       field: 'telefon'
     },
-    titula: {
-      type: DataTypes.STRING(50),
+    spol: {
+      type: DataTypes.BOOLEAN,
       allowNull: true,
-      field: 'titula'
-    },
-    username: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-      field: 'username'
-    },
-    website: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-      field: 'website'
-    },
-    idOdsjek: {
-      type: DataTypes.BIGINT,
-      allowNull: true,
-      field: 'id_odsjek'
-    },
-    idUloga: {
-      type: DataTypes.BIGINT,
-      allowNull: true,
-      field: 'id_uloga'
-    },
-    idKorisnik: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      field: 'idKorisnik'
-    },
-    datumRodjenja: {
-      type: DataTypes.DATEONLY,
-      allowNull: true,
-      field: 'datumRodjenja'
+      field: 'spol'
     },
     imePrezimeMajke: {
       type: DataTypes.STRING(100),
@@ -148,22 +86,59 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       field: 'imePrezimeOca'
     },
-    mjestoRodjenja: {
+    adresa: {
       type: DataTypes.STRING(50),
       allowNull: true,
-      field: 'mjestoRodjenja'
+      field: 'adresa'
     },
-    idOdsjek: {
-      type: DataTypes.BIGINT,
+    username: {
+      type: DataTypes.STRING(50),
       allowNull: true,
-      field: 'idOdsjek'
+      field: 'username'
     },
-    idUloga: {
-      type: DataTypes.BIGINT,
+    password: {
+      type: DataTypes.STRING(50),
       allowNull: true,
-      field: 'idUloga'
+      field: 'password'
+    },
+    linkedin: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      field: 'linkedin'
+    },
+    website: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      field: 'website'
+    },
+    fotografija: {
+      type: "BLOB",
+      allowNull: true,
+      field: 'fotografija'
+    },
+    indeks: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      field: 'indeks'
+    },
+    ciklus: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      field: 'ciklus'
+    },
+    semestar: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      field: 'semestar'
+    },
+    titula: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      field: 'titula'
     }
   }, {
-    tableName: 'korisnik'
+    tableName: 'Korisnik',
+    autoIncrement: true,
+    timestamps: false
   });
 };

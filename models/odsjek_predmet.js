@@ -21,21 +21,23 @@ module.exports = function(sequelize, DataTypes) {
       field: 'idPredmet'
     },
     semestar: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
+      type: DataTypes.ENUM('1','2'),
+      allowNull: false,
       field: 'semestar'
     },
-    ciklus: {
-      type: DataTypes.INTEGER(2),
-      allowNull: true,
-      field: 'ciklus'
+    godina: {
+      type: DataTypes.ENUM('1','2','3','4','5','6','7','8'),
+      allowNull: false,
+      field: 'godina'
     },
-    tip: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      field: 'tip'
+    obavezan: {
+      type: DataTypes.ENUM('0','1'),
+      allowNull: false,
+      field: 'obavezan'
     }
   }, {
-    tableName: 'odsjek_predmet'
+    tableName: 'odsjek_predmet',
+    autoIncrement: true,
+    timestamps: false
   });
 };

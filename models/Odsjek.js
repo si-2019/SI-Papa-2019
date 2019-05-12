@@ -3,19 +3,17 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('odsjek', {
     idOdsjek: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.INTEGER(10),
       allowNull: false,
       primaryKey: true,
       field: 'idOdsjek'
     },
     naziv: {
       type: DataTypes.STRING(25),
-      allowNull: false,
+      allowNull: true,
       field: 'naziv'
     }
   }, {
-    tableName: 'odsjek'
+    tableName: 'Odsjek'
   });
-};
-
 };

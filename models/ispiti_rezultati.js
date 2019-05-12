@@ -26,6 +26,8 @@ module.exports = function(sequelize, DataTypes) {
       field: 'bodovi'
     }
   }, {
-    tableName: 'ispiti_rezultati'
+    tableName: 'ispiti_rezultati',
+    autoIncrement: true,
+    timestamps: false
   });
 };

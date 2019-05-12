@@ -52,6 +52,8 @@ module.exports = function(sequelize, DataTypes) {
       field: 'opis'
     }
   }, {
-    tableName: 'Predmet'
+    tableName: 'Predmet',
+    autoIncrement: true,
+    timestamps: false
   });
 };
