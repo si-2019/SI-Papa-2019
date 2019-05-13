@@ -22,6 +22,28 @@ app.use("/*", (req, res, next) => {
   next();
 });
 
+app.get("/papa/trenutniPredmeti", function (req, res) {
+  var id_Studenta = req.body.idStudent;
+ 
+  db.AkademskaGodina.findOne({where:{aktuelna:{[Op.like]: '1'}}}).then(godina => {
+      db.predmet_student.findAll( { attributes :['idPredmet'], where: {idStudent: id_Studenta, idAkademskaGodina: godina.id}}).then(veze =>{
+          niz=[];
+          for(var i = 0; i<veze.length; i++){
+              niz.push(veze[i].idPredmet);
+          }
+          db.Predmet.findAll({where: {id:niz}}).then(predmeti=>{
+              res.send(predmeti);
+          }).catch(function(err){
+              console.log({val:err});
+          });
+      }).catch(function(err){
+          console.log({val:err});
+  });
+  }).catch(function(err){
+      console.log({val:err});
+  });
+});
+
 
 
 app.listen(31916, () => console.log('Server na portu: 31916'));
