@@ -22,6 +22,20 @@ app.use("/*", (req, res, next) => {
   next();
 });
 
+
+app.get("/papa/obavjestenjaStudentskaSluzba", function (req, res) {
+
+  db.Korisnik.findAll({attributes :['id'],where:{idUloga:5}}).then(admin => {
+      niz=[];
+      for(var i = 0; i<admin.length; i++){
+          niz.push(admin[i].id);
+      }
+      db.ObavjestenjeGlobalno.findAll({where:{idKorisnik:niz}}).then(obavijest=>{
+          res.send(obavijest);
+      }).catch(function(err){
+          console.log({val:err});
+      });
+
 app.get("/papa/trenutniPredmeti", function (req, res) {
   var id_Studenta = req.body.idStudent;
  
@@ -39,6 +53,7 @@ app.get("/papa/trenutniPredmeti", function (req, res) {
       }).catch(function(err){
           console.log({val:err});
   });
+    
   }).catch(function(err){
       console.log({val:err});
   });
