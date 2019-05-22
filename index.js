@@ -1,8 +1,3 @@
-PAPA_Sprint001_071
-PAPA_Sprint001_071
-
-PAPA_Sprint002_027
-develop
 const express = require("express");
 const bodyParser = require("body-parser");
 const moment = require("moment");
@@ -28,7 +23,6 @@ app.use("/*", (req, res, next) => {
 });
 
 //Azra
-PAPA_Sprint001_071
 app.get("/papa/polozeniPredmeti", function (req, res) {
   var id_Studenta = req.body.idStudent;
  
@@ -62,18 +56,16 @@ app.get("/papa/obavjestenjaProfesor", function (req, res) {
           }).catch(function(err){
               console.log({val:err});
           });           
-develop
+
       }).catch(function(err){
           console.log({val:err});
       });
   }).catch(function(err){
       console.log({val:err});
-PAPA_Sprint001_071
   });
 
 
   });    
-develop
 });
 
 app.get("/papa/obavjestenjaStudentskaSluzba", function (req, res) {
@@ -113,6 +105,5 @@ app.get("/papa/trenutniPredmeti", function (req, res) {
 });
 
 
-
 app.listen(31916, () => console.log('Server na portu: 31916'));
-develop
+
