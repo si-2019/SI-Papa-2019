@@ -104,6 +104,24 @@ app.get("/papa/trenutniPredmeti", function (req, res) {
   });
 });
 
+//Ferhadd 2
+app.get("/papa/obavjestenjaAdmin", function (req, res) {
+
+    db.Korisnik.findAll({attributes :['id'],where:{idUloga:4}}).then(admin => {
+        niz=[];
+        for(var i = 0; i<admin.length; i++){
+            niz.push(admin[i].id);
+        }
+        db.ObavjestenjeGlobalno.findAll({where:{idKorisnik:niz}}).then(obavijest=>{
+            res.send(obavijest);
+        }).catch(function(err){
+            console.log({val:err});
+        });
+    }).catch(function(err){
+        console.log({val:err});
+    });
+});
+
 
 app.listen(31916, () => console.log('Server na portu: 31916'));
 
