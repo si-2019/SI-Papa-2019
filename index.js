@@ -104,6 +104,41 @@ app.get("/papa/trenutniPredmeti", function (req, res) {
   });
 });
 
+//Ferhadd
+app.get("/papa/trenutniSaDrugihOdsjeka", function (req, res) {
+    var id_Studenta = req.query.idStudent;
+    db.AkademskaGodina.findOne({where:{aktuelna:{[Op.like]: '1'}}}).then(godina => {
+        db.Korisnik.findOne({where : {id:id_Studenta}}).then(student => {
+            db.predmet_student.findAll({attributes :['idPredmet'], where: {idStudent: id_Studenta, idAkademskaGodina: godina.id}}).then(veze =>{
+                niz=[];
+                for(var i = 0; i<veze.length; i++){
+                    niz.push(veze[i].idPredmet);
+                }
+                db.odsjek_predmet.findAll({attributes :['idPredmet'],where:{idOdsjek:{[Op.ne]:student.idOdsjek}, idPredmet:niz}}).then(predmetiNaDrugimOdsjecima =>{
+                    niz2=[];
+                    for(var i = 0; i<predmetiNaDrugimOdsjecima.length; i++){
+                        niz2.push(predmetiNaDrugimOdsjecima[i].idPredmet);
+                    }
+                    db.Predmet.findAll({where: {id:niz2}}).then(predmeti=>{
+                        res.send(predmeti);
+                    }).catch(function(err){
+                        console.log({val:err});
+                    });
+                }).catch(function(err){
+                    console.log({val:err});
+                });
+            }).catch(function(err){
+                console.log({val:err});
+            });
+
+        }).catch(function(err){
+            console.log({val:err});
+        });
+    }).catch(function(err){
+        console.log({val:err});
+    });
+});
+
 
 app.listen(31916, () => console.log('Server na portu: 31916'));
 
