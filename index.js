@@ -17,6 +17,9 @@ db.sequelize.sync()
     .catch((err) => console.log("Nije uspjesno povezano sa bazom!", err));
 
 
+app.get('/',(req, res)=>{
+    res.status(200).send();
+});
 
 app.use("/*", (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
