@@ -14,6 +14,8 @@ module.exports = function(sequelize, DataTypes) {
       field: 'naziv'
     }
   }, {
-    tableName: 'Odsjek'
+    tableName: 'Odsjek',
+    autoIncrement: true,
+    timestamps: false
   });
 };

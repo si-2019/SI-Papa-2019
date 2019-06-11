@@ -14,5 +14,6 @@ db.ObavjestenjePredmet = sequelize.import(__dirname + '/models/ObavjestenjePredm
 db.ObavjestenjeGlobalno = sequelize.import(__dirname + '/models/ObavjestenjeGlobalno.js');
 db.Ispit = sequelize.import(__dirname + '/models/Ispit.js');
 db.ispiti_rezultati = sequelize.import(__dirname + '/models/ispiti_rezultati.js');
+db.Odsjek = sequelize.import(__dirname + '/models/Odsjek.js');
 
 module.exports=db;
