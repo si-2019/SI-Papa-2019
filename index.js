@@ -548,6 +548,21 @@ app.get("/papa/neradniDani", function (req, res){
   });
 });
 
+app.get("/papa/godine", function (req, res) {
+    db.AkademskaGodina.findAll().then(godina => {
+       res.send(godina);
+    }).catch(function(err){
+        console.log({val:err});
+    });
+}); 
+
+app.get("/papa/sviPredmeti", function (req, res) {
+    db.Predmet.findAll().then(predmet => {
+       res.send(predmet);
+    }).catch(function(err){
+        console.log({val:err});
+    });
+}); 
 
 app.listen(PORT,function(){
     console.log('server successfully started on port '+PORT);
