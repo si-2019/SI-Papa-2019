@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const sequelize = require("sequelize");
 const moment = require("moment");
+const swaggerDoc = require('./swaggerDoc.js');
+
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -11,6 +13,7 @@ const Op = Sequelize.Op;
 const db = require('./db.js')
 
 var PORT = process.env.PORT || 31916;
+swaggerDoc(app);
 
 db.sequelize.sync()
     .then(() => console.log("Uspjesno povezano sa bazom!"))
@@ -29,6 +32,25 @@ app.use("/*", (req, res, next) => {
 });
 
 //Belmin 1
+   /**
+ * @swagger
+ * /papa/trenutniPredmeti:
+ *    get:
+ *      description: Vraća trenutni predmet 
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vracen predmet
+ *                  400:
+ *                      description: Došlo je do greške
+ */
+
 app.get("/papa/trenutniPredmeti", function (req, res) {
   var id_Studenta = req.query.idStudent;
   db.AkademskaGodina.findOne({where:{aktuelna:{[Op.like]: '1'}}}).then(godina => {
@@ -51,6 +73,25 @@ app.get("/papa/trenutniPredmeti", function (req, res) {
 });
 
 //Ilma 1
+  /**
+ * @swagger
+ * /papa/odslusaniPredmeti:
+ *    get:
+ *      description: Vraća odslusane predmete 
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni predmeti
+ *                  400:
+ *                      description: Došlo je do greške
+ */
+
 app.get("/papa/odslusaniPredmeti", function (req, res) {
   var id_Studenta = req.query.idStudent;
   db.AkademskaGodina.findOne({where:{aktuelna:{[Op.like]: '0'}}}).then(godina => {
@@ -73,6 +114,25 @@ app.get("/papa/odslusaniPredmeti", function (req, res) {
 });
 
 // Kenan 1
+  /**
+ * @swagger
+ * /papa/trenutniProfesori:
+ *    get:
+ *      description: Vraća trenutne profesore
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni profesori
+ *                  400:
+ *                      description: Došlo je do greške
+ */
+
 app.get("/papa/trenutniProfesori", function (req, res) {
   var id_Studenta = req.query.idStudent;
   db.AkademskaGodina.findOne({where:{aktuelna:{[Op.like]: '1'}}}).then(godina => {
@@ -104,6 +164,24 @@ app.get("/papa/trenutniProfesori", function (req, res) {
 
 
 // Merima 1
+ /**
+ * @swagger
+ * /papa/trenutniAsistenti:
+ *    get:
+ *      description: Vraća trenutne asistente
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni asistenti
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/trenutniAsistenti", function (req, res) {
   var id_Studenta = req.query.idStudent;
   console.log(req.query.idStudent);
@@ -135,6 +213,26 @@ app.get("/papa/trenutniAsistenti", function (req, res) {
 });
 
 // Azra 1
+ /**
+ * @swagger
+ * /papa/polozeniPredmeti:
+ *    get:
+ *      description: Vraća polozene predmete
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                      type: string
+ *                   idPredmet:
+ *                      type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni polozeni predmeti
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/polozeniPredmeti", function (req, res) {
   var id_Studenta = req.query.idStudent;
  
@@ -155,6 +253,26 @@ app.get("/papa/polozeniPredmeti", function (req, res) {
 });
 
 // Selma 1
+ /**
+ * @swagger
+ * /papa/nePolozeniPredmeti:
+ *    get:
+ *      description: Vraća nepolozene predmete
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                      type: string
+ *                   idPredmet:
+ *                      type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni nepolozeni predmeti
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/nePolozeniPredmeti", function (req, res) {
   var id_Studenta = req.query.idStudent;
  
@@ -174,6 +292,26 @@ app.get("/papa/nePolozeniPredmeti", function (req, res) {
 });
 
 // Ferhad 1
+/**
+ * @swagger
+ * /papa/trenutniSaDrugihOdsjeka:
+ *    get:
+ *      description: Vraća trenutne predmete sa drugih odsjeka
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                      type: string
+ *                   idPredmet:
+ *                      type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni trenutne predmete sa drugih odsjeka
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/trenutniSaDrugihOdsjeka", function (req, res) {
   var id_Studenta = req.query.idStudent;
   db.AkademskaGodina.findOne({where:{aktuelna:{[Op.like]: '1'}}}).then(godina => {
@@ -210,6 +348,26 @@ app.get("/papa/trenutniSaDrugihOdsjeka", function (req, res) {
 
 
 //Sakib 1
+/**
+ * @swagger
+ * /papa/trenutniSaDrugihSemestara:
+ *    get:
+ *      description: Vraća trenutne predmete sa drugih semestara
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                      type: string
+*                   idPredmet:
+ *                      type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni trenutne predmete sa drugih semestara
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/trenutniSaDrugihSemestara", function (req, res) {
   var id_Studenta = req.query.idStudent;
 
@@ -256,6 +414,24 @@ app.get("/papa/trenutniSaDrugihSemestara", function (req, res) {
 });
 
 // Ferhad 2
+/**
+ * @swagger
+ * /papa/obavjestenjaAdmin:
+ *    get:
+ *      description: Vraća obavjestenja administratora
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idUloga:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vracena obavjestenja
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/obavjestenjaAdmin", function (req, res) {
 
   db.Korisnik.findAll({attributes :['id'],where:{idUloga:4}}).then(admin => {
@@ -275,6 +451,24 @@ app.get("/papa/obavjestenjaAdmin", function (req, res) {
 
 
 //Belmin 2
+/**
+ * @swagger
+ * /papa/obavjestenjaStudentskaSluzba:
+ *    get:
+ *      description: Vraća obavjestenja studentske sluzbe
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idUloga:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vracena obavjestenja sluzbe
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/obavjestenjaStudentskaSluzba", function (req, res) {
 
   db.Korisnik.findAll({attributes :['id'],where:{idUloga:5}}).then(admin => {
@@ -293,6 +487,25 @@ app.get("/papa/obavjestenjaStudentskaSluzba", function (req, res) {
 });
 
 //Azra 2
+/**
+ * @swagger
+ * /papa/obavjestenjaProfesor:
+ *    get:
+ *      description: Vraća obavjestenja profesora
+ *    parameters:
+ *             - name: params
+ *               in: req.params
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vracena obavjestenja profesora
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/obavjestenjaProfesor", function (req, res) {
   var id_Studenta = req.query.idStudent;
 
@@ -324,6 +537,24 @@ app.get("/papa/obavjestenjaProfesor", function (req, res) {
 });
 
 // Merima 2
+/**
+ * @swagger
+ * /papa/obavjestenjaAsistent:
+ *    get:
+ *      description: Vraća obavjestenja asistenata
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vracena obavjestenja asistenata
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/obavjestenjaAsistent", function (req, res) {
   var id_Studenta = req.query.idStudent;
 
@@ -357,6 +588,24 @@ app.get("/papa/obavjestenjaAsistent", function (req, res) {
 
 
 //Selma 2
+/**
+ * @swagger
+ * /papa/upisaneOcijene:
+ *    get:
+ *      description: Vraća upisane ocjene
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vracena upisane ocjene
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/upisaneOcijene", function (req, res) {
   var id_Studenta = req.query.idStudent;
  
@@ -391,6 +640,24 @@ app.get("/papa/upisaneOcijene", function (req, res) {
 });
 
 // Ilma 2
+/**
+ * @swagger
+ * /papa/rezultatiIspita:
+ *    get:
+ *      description: Vraća rezultate ispita
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni rezultati ispita
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/rezultatiIspita", function (req, res) {
     var id_Studenta = req.query.idStudent;
 
@@ -441,6 +708,24 @@ app.get("/papa/rezultatiIspita", function (req, res) {
 
 
 //Sakib 2
+/**
+ * @swagger
+ * /papa/rezultatiIspita:
+ *    get:
+ *      description: Vraća rezultate ispita
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idStudent:
+ *                   type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni rezultati ispita
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/ispitiPrijava", function (req, res) {
     var id_Studenta = req.query.idStudent;
    
@@ -478,6 +763,28 @@ app.get("/papa/ispitiPrijava", function (req, res) {
     });
 });
 
+/**
+ * @swagger
+ * /papa/sviIspiti:
+ *    get:
+ *      description: Vraća sve ispite
+ *    parameters:
+ *             - name: body
+ *               schema:
+ *               type: object
+ *               properties:
+ *                   idOdsjek:
+ *                      type: string
+ *                   idPredmet:
+ *                      type: string
+ *                   godina:
+ *                      type: string
+ *               responses:
+ *                  200:
+ *                      description: Vraceni rezultati ispita
+ *                  400:
+ *                      description: Došlo je do greške
+ */
 app.get("/papa/sviIspiti", function (req, res) {
  
   db.Ispit.findAll({where: {rokPrijave:{ [Op.gte] : moment().toDate() }}}).then(ispiti =>{
@@ -539,7 +846,17 @@ app.get("/papa/sviIspiti", function (req, res) {
   });
 });
 
-
+/**
+ * @swagger
+ * /papa/neradniDani:
+ *    get:
+ *      description: Vraća sve predmete                  
+ *      responses:
+ *             200:
+ *               description: Vraca neradne dane
+ *             400:
+ *               description: Došlo je do greške
+ */
 app.get("/papa/neradniDani", function (req, res){
   db.sequelize.query("SELECT * FROM `NeradniDani`", { type: sequelize.QueryTypes.SELECT}).then(dani => {
     res.send(dani);
@@ -547,7 +864,17 @@ app.get("/papa/neradniDani", function (req, res){
       console.log({val:err});
   });
 });
-
+/**
+ * @swagger
+ * /papa/godine:
+ *    get:
+ *      description: Vraća sve predmete                  
+ *      responses:
+ *             200:
+ *               description: Vraca godine
+ *             400:
+ *               description: Došlo je do greške
+ */
 app.get("/papa/godine", function (req, res) {
     db.AkademskaGodina.findAll().then(godina => {
        res.send(godina);
@@ -555,7 +882,17 @@ app.get("/papa/godine", function (req, res) {
         console.log({val:err});
     });
 }); 
-
+/**
+ * @swagger
+ * /papa/sviPredmeti:
+ *    get:
+ *      description: Vraća sve predmete                  
+ *      responses:
+ *             200:
+ *               description: Vraceni svi predmeti
+ *             400:
+ *               description: Došlo je do greške
+ */
 app.get("/papa/sviPredmeti", function (req, res) {
     db.Predmet.findAll().then(predmet => {
        res.send(predmet);
