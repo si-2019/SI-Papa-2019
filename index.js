@@ -2,10 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const sequelize = require("sequelize");
 const moment = require("moment");
+var cors = require('cors');
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(cors());
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const db = require('./db.js')

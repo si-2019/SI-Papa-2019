@@ -19,6 +19,7 @@
   "homepage": "https://github.com/si-2019/SI-Papa-2019#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
