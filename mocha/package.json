@@ -1,0 +1,14 @@
+{
+  "name": "mocha",
+  "version": "1.0.0",
+  "description": "mocha",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "ob",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0"
+  }
+}
