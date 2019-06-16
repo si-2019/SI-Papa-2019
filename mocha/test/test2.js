@@ -15,7 +15,7 @@ describe("SAMPLE unit test",function(){
 
     // calling home page api
     server
-    .get("/papa/trenutniPredmeti")
+    .get("/papa/odslusaniPredmeti")
     .expect("Content-type",/json/)
     .expect(200) // THis is HTTP response
     .end(function(err,res){
@@ -28,5 +28,4 @@ describe("SAMPLE unit test",function(){
   });
 
 });
-
 
