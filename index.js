@@ -7,7 +7,7 @@ var cors = require('cors');
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const db = require('./db.js')
